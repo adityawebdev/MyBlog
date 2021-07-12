@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind CSS</title>
+    <link rel="stylesheet" href="../build/style.css" />
+  </head>
+  <body>
+    <div class="max-w-screen-lg mx-auto">
+      <!-- header -->
+
+      <!-- header ends here -->
+
+      <main class="mt-10">
+        <div class="mb-4 md:mb-0 w-full mx-auto relative">
+          <div class="px-4 lg:px-0 mb-8">
+            <h2 class="text-4xl font-semibold text-gray-800 leading-tight">
+              Install Tailwind CSS with Vanilla Javascript
+            </h2>
+          </div>
+
+          <img
+            src="https://www.markusantonwolf.com/media/pages/blog/tailwind-css/265298487-1596675041/tailwind-css-logo.svg"
+            style="height: 28em"
+          />
+        </div>
+
+        <div
+          class="
+            flex flex-col
+            lg:flex-row lg:space-x-12
+            items-center
+            justify-center
+          "
+        >
+          <div
+            class="
+              px-4
+              lg:px-0
+              mt-12
+              text-gray-700 text-lg
+              leading-relaxed
+              w-full
+              lg:w-3/4
+            "
+          >
+            <p class="pb-6">
+              Tailwind is a utility-first CSS framework. In contrast to other
+              CSS frameworks like Bootstrap or Materialize CSS it doesn’t come
+              with predefined components. Instead Tailwind CSS operates on a
+              lower level and provides you with a set of CSS helper classes. By
+              using this classes you can rapidly create custom design with ease.
+              Tailwind CSS is not opinionated and let’s you create you own
+              unique design.
+            </p>
+            <h2 class="text-3xl font-semibold text-gray-800 leading-tight">
+              Setup a Project with TailwindCSS
+            </h2>
+            <p class="pb-6 mt-4">
+              Lets get started with tailwind css by creating a project folder
+              named "tailwind" (you can name it anything you want) :
+            </p>
+            <pre>$ mkdir tailwind</pre>
+
+            <p class="pb-6 mt-4">Move to directory we created a moment ago:</p>
+            <pre>$ cd tailwind </pre>
+            <p class="pb-6 mt-4">
+              and create a new package.json file by using the npm command in the
+              following way:
+            </p>
+            <pre>$ npm init -y </pre>
+            <p class="pb-6 mt-4">
+              This enables us to use the Node.js Package Manager (NPM) in the
+              following steps to manage our dependencies within this project.
+              The first dependency which needs to be added to the project is the
+              tailwindcss package. Use the following command to install it:
+            </p>
+            <pre>$ npm install tailwindcss </pre>
+            <p class="pb-6 mt-4">
+              This command makes sure that the tailwindcss package is downloaded
+              and saved in the node_modules folder and that the dependency is
+              added to the package.json file. The next step is to add Tailwind
+              to the project’s CSS. This is being done by creating a new file
+              css/styles.css and inserting the @tailwind directive three times
+              to import Tailwind’s base, components, and utilities styles.:
+            </p>
+            <pre>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;</pre
+            >
+            <p class="pb-6 mt-4">
+              Later on, when executing the Tailwind CSS build process, those
+              directives will be replaced by the corresponding Tailwind CSS
+              code.
+            </p>
+            <h2 class="text-3xl font-semibold text-gray-800 leading-tight">
+              Creating The Tailwind Configuration File
+            </h2>
+            <p class="pb-6 mt-4">
+              To complete the Tailwind setup we can create an initial
+              configuration file by using the following command within the
+              project folder:
+            </p>
+            <pre>$ npx tailwindcss init </pre>
+            <p class="pb-6 mt-4">
+              This command is creating a new file named tailwind.config.js with
+              the following content inside:
+            </p>
+            <pre>
+module.exports = {
+              theme: {
+                extend: {},
+              },
+              variants: {},
+              plugins: [],
+            } </pre
+            >
+            <p class="pb-6 mt-4">
+              Creating this file is optional and is only needed if you want to
+              use it to insert additional settings here. Later on we’ll see an
+              example of how to use this file.
+            </p>
+            <h2 class="text-3xl font-semibold text-gray-800 leading-tight">
+              Processing CSS with Tailwind
+            </h2>
+            <p class="pb-6 mt-4">
+              Tailwind CSS requires a build process which is processing CSS
+              files and making sure that the Tailwind CSS code is inserted
+              according to the directives used and the Tailwind configuration in
+              place.
+              <br />
+              To setup a build process one option is to use PostCSS. PostCSS is
+              a tool for transforming CSS with JavaScript. It works with
+              plugins, so it’s easy to perform the TailwindCSS processing steps
+              by using the TailwindCSS PostCSS plugin.
+              <br />
+              In addition we’ll also use a plugin which is called autoprefixer.
+              This plugin parses CSS code and adds vendor prefixes. Let’s
+              install PostCSS and the autoprefixer plugin by using the following
+              command:
+            </p>
+            <pre>$ npm install postcss-cli autoprefixer</pre>
+            <p class="pb-6 mt-4">
+              With those packages installed let’s create a PostCSS configuration
+              file in the project directory:
+            </p>
+            <pre>$ touch postcss.config.js</pre>
+            <p class="pb-6 mt-4">
+              Insert the following content into the new file:
+            </p>
+            <pre>
+module.exports = {
+              plugins: [
+                  require('tailwindcss'),
+                  require('autoprefixer'),
+              ]
+          }</pre
+            >
+            <p class="pb-6 mt-4">
+              Here we’re specifying that the PostCSS process should perform CSS
+              processing with the tailwindcss and the autoprefixer plugins.
+              <br />
+              <br />
+              In package.json insert the following build script:
+            </p>
+            <pre>"build": "postcss css/styles.css -o build/styles.css"</pre>
+            <p class="pb-6 mt-4">
+              This script is executing PostCSS processing for file
+              css/styles.css (this is the CSS file in which we’ve inserted the
+              Tailwind directives) and outputting the result to file
+              build/styles.css. To execute this script just type in:
+            </p>
+            <pre>$npm run build</pre>
+            <p class="pb-6 mt-4 italic">
+              Now you can link the css file inside build folder to your HTML
+              page and start development. Everytime change something in css file
+              inside css folder you have to run build command.
+            </p>
+            <p class="pb-6 mt-4 italic">Thank You .</p>
+          </div>
+        </div>
+      </main>
+      <!-- main ends here -->
+    </div>
+    <footer class="flex justify-center items-center p-4" id="footer">
+      <a href="https://github.com/adityawebdev"
+        ><img class="h-12 w-12" src="../img/github.gif"
+      /></a>
+      <a href="mailto:adityasinha3201@yahoo.com"
+        ><img class="h-12 w-12" src="../img/icons8-gmail.gif"
+      /></a>
+      <a href="https://www.instagram.com/officialadityasinha/?hl=en"
+        ><img class="h-12 w-12" src="../img/icons8-instagram.gif"
+      /></a>
+      <a href="https://www.facebook.com/profile.php?id=100015627424337"
+        ><img class="h-12 w-12" src="../img/icons8-facebook.gif"
+      /></a>
+      <a href="https://twitter.com/AdiS3201"
+        ><img class="h-12 w-12" src="../img/icons8-twitter.gif"
+      /></a>
+      <a href="https://www.linkedin.com/in/aditya-sinha-698029202/"
+        ><img class="h-12 w-12" src="../img/icons8-linkedin-2.gif"
+      /></a>
+    </footer>
+    <div class="copyright flex justify-center pb-2">
+      <p class="align-middle">Copyright © Aditya Sinha 2021</p>
+    </div>
+  </body>
+</html>
