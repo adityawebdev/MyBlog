@@ -5,11 +5,6 @@
 body {
   scroll-behavior: smooth;
 }
-.right h1 {
-  background-image: url("/img/texture.jpg");
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 .ani-bg {
   /* background-color: red; */
